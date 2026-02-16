@@ -3,7 +3,8 @@ sap.ui.define([
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sap/ui/model/Sorter",
-	"sap/m/MessageBox"
+	"sap/m/MessageBox", 
+  "sap/f/library"
 ], function (Controller, Filter, FilterOperator, Sorter, MessageBox) {
 	"use strict";
 
@@ -35,6 +36,12 @@ sap.ui.define([
 				oSorter = new Sorter("Name", this._bDescendingSort);
 
 			oBinding.sort(oSorter);
+		},
+
+		onListItemPress: function () {
+			var oFCL = this.oView.getParent().getParent();
+
+			oFCL.setLayout(fioriLibrary.LayoutType.TwoColumnsMidExpanded);
 		}
 	});
 });
