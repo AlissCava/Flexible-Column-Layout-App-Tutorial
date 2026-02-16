@@ -36,8 +36,9 @@ sap.ui.define([
 			return this._getFcl().then(function(oFCL) {
 				var oSettings = {
 					defaultTwoColumnLayoutType: fioriLibrary.LayoutType.TwoColumnsMidExpanded,
-					defaultThreeColumnLayoutType: fioriLibrary.LayoutType.ThreeColumnsMidExpanded
-				};
+					defaultThreeColumnLayoutType: fioriLibrary.LayoutType.ThreeColumnsMidExpanded,
+				  initialColumnsCount: 2
+        };
 				return (FlexibleColumnLayoutSemanticHelper.getInstanceFor(oFCL, oSettings));
 			});
 		},
@@ -57,7 +58,7 @@ sap.ui.define([
 			}
 			oModel.setProperty("/layout", sLayout);
 		},
-    
+
     getFcl: function () {
 			return new Promise(function(resolve, reject) {
 				var oFCL = this.getRootControl().byId('flexibleColumnLayout');
