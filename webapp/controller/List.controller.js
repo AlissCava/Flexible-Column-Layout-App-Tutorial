@@ -1,10 +1,10 @@
 sap.ui.define([
+	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sap/ui/model/Sorter",
-	"sap/m/MessageBox", 
-  "sap/f/library"
+	"sap/m/MessageBox"
 ], function (Controller, Filter, FilterOperator, Sorter, MessageBox) {
 	"use strict";
 
@@ -13,7 +13,7 @@ sap.ui.define([
 			this.oView = this.getView();
 			this._bDescendingSort = false;
 			this.oProductsTable = this.oView.byId("productsTable");
-      this.oRouter = this.getOwnerComponent().getRouter();
+			this.oRouter = this.getOwnerComponent().getRouter();
 		},
 
 		onSearch: function (oEvent) {
@@ -41,9 +41,15 @@ sap.ui.define([
 
 		onListItemPress: function (oEvent) {
 			var productPath = oEvent.getSource().getBindingContext("products").getPath(),
-				product = productPath.split("/").slice(-1).pop();
-
-			this.oRouter.navTo("detail", {layout: fioriLibrary.LayoutType.TwoColumnsMidExpanded, product: product});
+				product = productPath.split("/").slice(-1).pop(),
+				oNextUIState;
+			this.getOwnerComponent().getHelper().then(function (oHelper) {
+				oNextUIState = oHelper.getNextUIState(1);
+				this.oRouter.navTo("detail", {
+					layout: oNextUIState.layout,
+					product: product
+				});
+			}.bind(this));
 		}
 	});
 });
