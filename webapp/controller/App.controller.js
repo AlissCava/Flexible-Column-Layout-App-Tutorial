@@ -9,6 +9,7 @@ sap.ui.define([
 			this.oOwnerComponent = this.getOwnerComponent();
 			this.oRouter = this.oOwnerComponent.getRouter();
 			this.oRouter.attachRouteMatched(this.onRouteMatched, this);
+      this.currentSupplier = oArguments.supplier;
 		},
 
 		onRouteMatched: function (oEvent) {
